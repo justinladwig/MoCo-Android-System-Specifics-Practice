@@ -51,7 +51,7 @@ class NotificationActivity : ComponentActivity() {
         Play the notification sound when the activity is created.
      */
     private fun playMedia() {
-        mediaPlayer = MediaPlayer.create(this, /* TODO: Include the ringtone here */).apply {
+        mediaPlayer = MediaPlayer.create(this, /* TODO: Include the ringtone here (res/raw/ folder) */).apply {
             isLooping = true
         }
         mediaPlayer?.start()
