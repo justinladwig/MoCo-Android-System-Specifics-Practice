@@ -89,7 +89,7 @@ fun NotificationScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier.height(32.dp)
             )
             Image(
-                painter = painterResource(id = /* TODO: Include the notification bell vector here. Distinguish between day and night mode. Use files in raw directory and create a vector drawable for each. */) ,
+                painter = painterResource(id = /* TODO: Include the notification bell vector here. Distinguish between day and night mode. Use SVG files in res/raw/ directory and create a vector drawable for each. */) ,
                 contentDescription = null
             )
         }

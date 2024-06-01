@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        /* TODO: Create the notification channel by calling createNotificationChannel() function defined below */
+        createNotificationChannel()
         setContent {
             AndroidSpecificsPracticeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -81,7 +82,8 @@ class MainActivity : ComponentActivity() {
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        /* TODO: Start the permission launcher by calling requestPermissionLauncher.launch() function */
+                        /* Here the permission dialog is shown */
+                        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                     }
                 }
             }
@@ -99,7 +101,7 @@ class MainActivity : ComponentActivity() {
                 The onClick function should create the notification.
              */
             Button(onClick = {
-                /* TODO: Show notification by calling createNotification() function below*/
+                createNotification()
             }) {
                 Text(
                     text = "Create Notification", /*TODO: replace by resource*/
@@ -142,7 +144,17 @@ class MainActivity : ComponentActivity() {
      */
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            /* TODO: Create and register the notification channel */
+            /* Create and register the notification channel */
+            val channel = NotificationChannel(
+                /* TODO: Enter a channel id here */,
+                /* TODO: Enter the channel name here */,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.description = /* TODO: Enter the channel description here */
+
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+
         }
 
     }
@@ -161,7 +173,7 @@ class MainActivity : ComponentActivity() {
             The intent is then used to create the PendingIntent.
             The pending intent should be used in setContentIntent() function in the notification builder.
         */
-        val intent = Intent(this,/* TODO: Enter the class reference to notification activity here (NotificationActivity::class.java)*/).apply {
+        val intent = Intent(this, NotificationActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(
@@ -170,8 +182,12 @@ class MainActivity : ComponentActivity() {
             intent,
             PendingIntent.FLAG_IMMUTABLE)
 
-        /* TODO: Build the notification (Create a Builder and apply configuration)*/
-
+        /* Build the notification */
+        val builder = NotificationCompat(this, /* TODO: Enter the channel id here (from the channel above)*/)
+            .setContentTitle(/* TODO: Enter a title for your Notification here */)
+            .setContentText(/* TODO: Enter a text for your Notification here */)
+            .setSmallIcon(/* TODO: Enter the icon resource for your notification here */)
+            .setContentIntent(pendingIntent)
 
         /*
             The notification is registered here,
@@ -184,7 +200,8 @@ class MainActivity : ComponentActivity() {
                     Manifest.permission.POST_NOTIFICATIONS
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                /* TODO: Register the notification (Do notify())*/
+                /* Register the notification */
+                notify(1, builder.build())
             } else
                 Toast.makeText(this@MainActivity, "Permission not granted", Toast.LENGTH_SHORT).show()
         }
@@ -203,4 +220,4 @@ fun Activity.openAppSettings() {
 
 /*
     TODO: Translate all string resources to german language with translation editor
- */
+*/
