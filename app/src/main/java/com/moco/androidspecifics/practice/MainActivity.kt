@@ -184,7 +184,7 @@ class MainActivity : ComponentActivity() {
         val builder = NotificationCompat.Builder(this, /* TODO: Enter the channel id here (from the channel above)*/)
             .setContentTitle(/* TODO: Enter a title for your Notification here */)
             .setContentText(/* TODO: Enter a text for your Notification here */)
-            .setSmallIcon(/* TODO: Enter the icon resource for your notification here */)
+            .setSmallIcon(/* TODO: Create a vector resource that represents a smiley. Reference this created icon here. */)
             .setContentIntent(pendingIntent)
 
         /*
