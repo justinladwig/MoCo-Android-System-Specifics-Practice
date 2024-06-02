@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.provider.MediaStore.Audio.Media
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,7 +31,6 @@ import com.moco.androidspecifics.practice.ui.theme.AndroidSpecificsPracticeTheme
 class NotificationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         playMedia()
         setContent {
             AndroidSpecificsPracticeTheme {
