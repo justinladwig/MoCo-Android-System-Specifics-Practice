@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidSpecificsPractice"
         tools:targetApi="31">
+        <!-- TODO: Add icon -->
+        <!-- TODO: Add round icon -->
         <activity
             android:name=".NotificationActivity"
             android:exported="false"
             android:label="@string/title_activity_notification"
             android:theme="@style/Theme.AndroidSpecificsPractice" />
-        <!-- TODO: Add icon -->
-        <!-- TODO: Add round icon -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
